@@ -24,10 +24,13 @@ public class AddNoteActivity extends AppCompatActivity {
     public static final String EXTRA_PRIORITY =
             "roomviewmodellivedatarecyclerviewmvvm.roomviewmodellivedatarecyclerviewmvvm.roomviewmodellivedatarecyclerviewmvvm.EXTRA_PRIORITY";
 
+    public static final String PHONE_OR_EMAIL =
+            "roomviewmodellivedatarecyclerviewmvvm.roomviewmodellivedatarecyclerviewmvvm.roomviewmodellivedatarecyclerviewmvvm.PHONE_OR_EMAIL";
 
     private EditText editTextTitle;
     private EditText editTextDescription;
     private NumberPicker numberPickerPriority;
+    private EditText phoneoremail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,7 @@ public class AddNoteActivity extends AppCompatActivity {
         editTextTitle = (EditText) findViewById( R.id.edit_tetx_title );
         editTextDescription = (EditText) findViewById( R.id.edit_tetx_Description );
         numberPickerPriority = (NumberPicker) findViewById( R.id.number_picker_priority );
+        phoneoremail = (EditText) findViewById( R.id.edit_tetx_PhneOrEmail );
 
 
         numberPickerPriority.setMinValue( 1 );
@@ -51,17 +55,19 @@ public class AddNoteActivity extends AppCompatActivity {
             editTextTitle.setText( intent.getStringExtra( EXTRA_TITLE ) );
             editTextDescription.setText( intent.getStringExtra( EXTRA_DESCRIPTION ) );
             numberPickerPriority.setValue( intent.getIntExtra( EXTRA_PRIORITY,1 ) );
+            phoneoremail.setText( intent.getStringExtra(PHONE_OR_EMAIL) );
         }else {
             setTitle( "Add Note" );
         }
     }
 
     private void saveNote(){
-    String title = editTextTitle.getText().toString();
+        String title = editTextTitle.getText().toString();
         String description = editTextDescription.getText().toString();
         int priority = numberPickerPriority.getValue();
+        String pe = phoneoremail.getText().toString();
 
-        if(title.trim().isEmpty() || description.trim().isEmpty()){
+        if(title.trim().isEmpty() || description.trim().isEmpty() || pe.trim().isEmpty()){
             Toast.makeText( this, "Please insert full data", Toast.LENGTH_SHORT ).show();
             return;
         }
@@ -69,6 +75,7 @@ public class AddNoteActivity extends AppCompatActivity {
         data.putExtra( EXTRA_TITLE,title );
         data.putExtra( EXTRA_DESCRIPTION,description );
         data.putExtra( EXTRA_PRIORITY,priority );
+        data.putExtra( PHONE_OR_EMAIL,pe );
 
         int id = getIntent().getIntExtra(EXTRA_ID,-1);
         if(id != -1){

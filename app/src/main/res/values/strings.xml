@@ -13,5 +13,6 @@
     <string name="time">time</string>
     <string name="date">date</string>
     <string name="Selecttimeofremmember">تحديد وقت التذكير</string>
+    <string name="text_view_emailorphone">Email or Phone</string>
 
 </resources>

@@ -2,7 +2,6 @@ package roomviewmodellivedatarecyclerviewmvvm.roomviewmodellivedatarecyclerviewm
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -11,20 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.app.AlarmManager;
-import android.app.Dialog;
-import android.app.PendingIntent;
-import android.app.TimePickerDialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.os.Handler;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -39,22 +26,16 @@ import android.widget.VideoView;
 import com.example.roomviewmodellivedatarecyclerviewmvvm.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.Calendar;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import roomviewmodellivedatarecyclerviewmvvm.roomviewmodellivedatarecyclerviewmvvm.roomviewmodellivedatarecyclerviewmvvm.Adapter.NoteAdapter;
-import roomviewmodellivedatarecyclerviewmvvm.roomviewmodellivedatarecyclerviewmvvm.roomviewmodellivedatarecyclerviewmvvm.BroadcastReceiver.AlertReceiver;
-import roomviewmodellivedatarecyclerviewmvvm.roomviewmodellivedatarecyclerviewmvvm.roomviewmodellivedatarecyclerviewmvvm.BroadcastReceiver.Catcher;
-import roomviewmodellivedatarecyclerviewmvvm.roomviewmodellivedatarecyclerviewmvvm.roomviewmodellivedatarecyclerviewmvvm.BroadcastReceiver.Notification_reciever;
 import roomviewmodellivedatarecyclerviewmvvm.roomviewmodellivedatarecyclerviewmvvm.roomviewmodellivedatarecyclerviewmvvm.Data.Note;
 import roomviewmodellivedatarecyclerviewmvvm.roomviewmodellivedatarecyclerviewmvvm.roomviewmodellivedatarecyclerviewmvvm.Model.NoteViewModel;
 
-import static android.widget.Toast.LENGTH_LONG;
-
 public class MainActivity extends AppCompatActivity {
+
+    // https://www.youtube.com/watch?v=ARpn-1FPNE4&list=PLrnPJCHvNZuDihTpkRs6SpZhqgBqPU118
+
     public static final int ADD_NOTE_REQUEST = 1;
     public static final int EDIT_NOTE_REQUEST = 2;
     private NoteViewModel noteViewModel;
@@ -230,8 +211,9 @@ public class MainActivity extends AppCompatActivity {
             String title = data.getStringExtra( AddNoteActivity.EXTRA_TITLE );
             String description = data.getStringExtra( AddNoteActivity.EXTRA_DESCRIPTION );
             int priority = data.getIntExtra( AddNoteActivity.EXTRA_PRIORITY,1 );
+            int phoneoremail = data.getIntExtra( AddNoteActivity.PHONE_OR_EMAIL,1 );
 
-            Note note = new Note( title,description,priority );
+            Note note = new Note( title,description,priority,phoneoremail );
             noteViewModel.insert(note);
 
             Toast.makeText( this, "Note saved", Toast.LENGTH_SHORT ).show();

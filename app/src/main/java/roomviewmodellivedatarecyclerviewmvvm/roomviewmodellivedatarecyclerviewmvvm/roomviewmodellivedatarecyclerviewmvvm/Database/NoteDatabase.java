@@ -12,7 +12,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import roomviewmodellivedatarecyclerviewmvvm.roomviewmodellivedatarecyclerviewmvvm.roomviewmodellivedatarecyclerviewmvvm.Data.InterfaceNote;
 import roomviewmodellivedatarecyclerviewmvvm.roomviewmodellivedatarecyclerviewmvvm.roomviewmodellivedatarecyclerviewmvvm.Data.Note;
 
-@Database( entities = {Note.class}, version = 1)
+// https://stackoverflow.com/questions/44197309/room-cannot-verify-the-data-integrity
+@Database( entities = {Note.class}, version = 3)   // Was 1  2
 public abstract class NoteDatabase extends RoomDatabase {
 
     private static NoteDatabase instance;
@@ -45,9 +46,10 @@ private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback(){
        }
         @Override
         protected Void doInBackground(Void... voids) {
-            noteDao.insert( new Note( "Titel 1","Descrption 1",1) );
-            noteDao.insert( new Note( "Titel 2","Descrption 2",2) );
-            noteDao.insert( new Note( "Titel 3","Descrption 3",3) );
+            noteDao.insert( new Note(  "Titel 1","Descrption 1",1) );
+            noteDao.insert( new Note(  "Titel 2","Descrption 2",2) );
+            noteDao.insert( new Note(  "Titel 3","Descrption 3",3) );
+            noteDao.insert( new Note(  "Titel 4","Descrption 4",4) );
 
             return null;
         }

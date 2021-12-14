@@ -35,9 +35,10 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
         @SuppressLint("DiffUtilEquals")
         @Override
         public boolean areContentsTheSame(@NonNull Note oldItem, @NonNull Note newItem) {
-            return oldItem.getTitle().equals( newItem.getTitle() ) &&
+            return  oldItem.getTitle().equals( newItem.getTitle() ) &&
                     oldItem.getDescription().equals( newItem.getDescription() ) &&
-                    oldItem.getPriority() == newItem.getPriority();
+                    oldItem.getPriority() == newItem.getPriority() &&
+                    oldItem.getPhoneoremail() == newItem.getPhoneoremail();
         }
     };
 
@@ -55,6 +56,7 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
         holder.textViewTitle.setText( currentNote.getTitle() );
         holder.textViewDescription.setText( currentNote.getDescription() );
         holder.textViewPriority.setText( String.valueOf( currentNote.getPriority() ) );
+//        holder.textViewEmailOrPhone.setText( String.valueOf( currentNote.getPhoneoremail() ) );
 
     }
 
@@ -67,12 +69,14 @@ public class NoteAdapter extends ListAdapter<Note, NoteAdapter.NoteHolder> {
         private TextView textViewTitle;
         private TextView textViewDescription;
         private TextView textViewPriority;
+        private TextView textViewEmailOrPhone;
 
         public NoteHolder(@NonNull View itemView) {
             super( itemView );
             textViewTitle = itemView.findViewById( R.id.text_view_title );
             textViewDescription = itemView.findViewById( R.id.text_view_description );
             textViewPriority = itemView.findViewById( R.id.text_view_priority );
+            textViewEmailOrPhone = itemView.findViewById( R.id.edit_tetx_PhneOrEmail );
 
             itemView.setOnClickListener( new View.OnClickListener() {
                 @Override
